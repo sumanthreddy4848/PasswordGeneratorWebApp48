@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+ 
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+ 
+        h1 {
+            color: #4CAF50;
+        }
+ 
+        input[type="number"] {
+            padding: 10px;
+            width: 80px;
+            font-size: 16px;
+            text-align: center;
+        }
+ 
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+ 
+        button:hover {
+            background-color: #45a049;
+        }
+ 
+        #password {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Generator</h1>
+        <p>Enter the length of the password:</p>
+        <input type="number" id="length" min="8" max="50" value="12">
+        <br><br>
+        <button onclick="generatePassword()">Generate Password</button>
+        <div id="password"></div>
+    </div>
+ 
+    <script>
+        async function generatePassword() {
+            const length = document.getElementById('length').value;
+            const response = await fetch(`/generatepassword?length=${length}`);
+            const data = await response.text();
+            document.getElementById('password').innerText = data;
+        }
+    </script>
+</body>
+</html>
